@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  hello:
+    build:
+      context: hello
+    ports:
+      - 80:80
