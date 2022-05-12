@@ -2,6 +2,8 @@ name: Workflow
 
 on:
   push:
+    paths-ignore:
+    - 'helm/**'
 
 jobs:
   build:
