@@ -12,4 +12,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: 'Deploy'
-      run: helm upgrade helm --install
+      run: helm upgrade hello ./helm --install
