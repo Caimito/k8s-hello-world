@@ -10,6 +10,6 @@ jobs:
     run:
       working-directory: ./helm
   steps:
-  - uses: actions/checkout@v3
+  - uses: actions/checkout@v2
   - name: Pull Helm chart dependencies
     run: helm dependency update helm
