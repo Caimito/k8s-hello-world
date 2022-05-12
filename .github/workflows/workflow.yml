@@ -11,5 +11,16 @@ jobs:
         working-directory: ./hello
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag hello:latest
+    - name: Prepare Docker Image Tag
+        id: prep
+        run: echo ::set-output name=docker-image-tag::ghcr.io/caimito/hello:latest
+      - name: Docker Login
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build container
+        run: docker build -t ${{ steps.prep.outputs.docker-image-tag }} .
+      - name: Push container
+        run: docker push --all-tags ghcr.io/caimito/hello
