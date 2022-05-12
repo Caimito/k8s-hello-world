@@ -1,0 +1,15 @@
+name: Deploy to K8s
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+  defaults:
+    run:
+      working-directory: ./helm
+  steps:
+  - uses: actions/checkout@v3
+  - name: Pull Helm chart dependencies
+    run: helm dependency update helm
