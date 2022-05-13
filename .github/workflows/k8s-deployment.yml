@@ -16,5 +16,7 @@ jobs:
       run: |
         echo "${{ secrets.KUBECONFIG }}" >> kubeconfig.yml
         chmod og-rw kubeconfig.yml
+    - name: Add registry
+      run: helm registry login -u ${{ secrets.GITHUB_TOKEN }} ghcr.io
     - name: 'Deploy'
       run: helm upgrade hello ./helm --install --force --kubeconfig kubeconfig.yml
