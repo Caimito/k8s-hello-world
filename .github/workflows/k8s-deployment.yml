@@ -12,11 +12,20 @@ jobs:
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v3
+    - name: Docker Login
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     - name: Configure kubectl
       run: |
         echo "${{ secrets.KUBECONFIG }}" >> kubeconfig.yml
         chmod og-rw kubeconfig.yml
-    - name: Add registry
-      run: helm registry login -u ${{ secrets.GITHUB_TOKEN }} ghcr.io
+    - name: Create secret
+      run: |
+        kubectl create secret generic regcred \
+          --from-file=.dockerconfigjson=.docker/config.json> \
+          --type=kubernetes.io/dockerconfigjson
     - name: 'Deploy'
       run: helm upgrade hello ./helm --install --force --kubeconfig kubeconfig.yml
