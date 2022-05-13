@@ -17,4 +17,4 @@ jobs:
         echo "${{ secrets.KUBECONFIG }}" >> kubeconfig.yml
         chmod og-rw kubeconfig.yml
     - name: 'Deploy'
-      run: helm upgrade hello ./helm --install --kubeconfig kubeconfig.yml
+      run: helm upgrade hello ./helm --install --force --kubeconfig kubeconfig.yml
