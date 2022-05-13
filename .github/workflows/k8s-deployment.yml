@@ -17,6 +17,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Configure kubectl
       run: |
+        echo ${{ secrets.KUBECONIFG }}
         echo ${{ secrets.KUBECONIFG }} > kubeconfig.yml
         chmod og-rw kubeconfig.yml
     - name: env
