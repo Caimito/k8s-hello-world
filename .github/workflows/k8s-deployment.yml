@@ -18,5 +18,7 @@ jobs:
     - name: Configure kubectl
       run: |
         echo ${{ secrets.KUBECONIFG }} > kubeconfig.yml
+    - name: Init helm
+      run: helm init
     - name: 'Deploy'
       run: helm upgrade hello ./helm --install 
