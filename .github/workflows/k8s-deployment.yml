@@ -11,5 +11,11 @@ jobs:
         working-directory: ./hello
     steps:
     - uses: actions/checkout@v3
-    - name: 'Deploy'
-      run: helm upgrade hello ./helm --install
+    - name: Configure kubectl
+      run: |
+      mkdir .kube
+      echo ${{ secrets.KUBECONIFG }} > .kube/config
+    - name: Print
+      run: kubectl get nodes
+    # - name: 'Deploy'
+    #   run: helm upgrade hello ./helm --install
