@@ -13,8 +13,8 @@ jobs:
     - uses: actions/checkout@v3
     - name: Configure kubectl
       run: |
-      mkdir .kube
-      echo ${{ secrets.KUBECONIFG }} > .kube/config
+        mkdir .kube
+        echo ${{ secrets.KUBECONIFG }} > .kube/config
     - name: Print
       run: kubectl get nodes
     # - name: 'Deploy'
