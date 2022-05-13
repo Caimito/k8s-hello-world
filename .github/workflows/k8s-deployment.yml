@@ -21,5 +21,7 @@ jobs:
         chmod og-rw kubeconfig.yml
     - name: env
       run: helm env
+    - name: print
+      run: cat kubeconfig.yml
     - name: 'Deploy'
       run: helm upgrade hello ./helm --install --kubeconfig kubeconfig.yml
