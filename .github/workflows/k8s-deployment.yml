@@ -5,7 +5,7 @@ on:
   push:
 
 env:
-  KUBECONFIG="kubeconfig.yml"
+  KUBECONFIG: "kubeconfig.yml"
 
 jobs:
   deploy:
