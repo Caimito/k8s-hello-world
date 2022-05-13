@@ -4,6 +4,7 @@ on:
   push:
     paths-ignore:
     - 'helm/**'
+    - '**/k8s-deployment.yml'
 
 jobs:
   build:
