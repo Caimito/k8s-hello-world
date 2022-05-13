@@ -18,6 +18,7 @@ jobs:
     - name: Configure kubectl
       run: |
         echo ${{ secrets.KUBECONIFG }} > kubeconfig.yml
+        chmod og-rw kubeconfig.yml
     - name: env
       run: helm env
     - name: 'Deploy'
