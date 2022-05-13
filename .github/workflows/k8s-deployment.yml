@@ -3,7 +3,7 @@ name: Deploy to K8s
 on:
   workflow_dispatch:
   push:
-  
+
 
 jobs:
   deploy:
@@ -15,8 +15,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Configure kubectl
       run: |
-        mkdir .kube
         echo ${{ secrets.KUBECONIFG }} > kubeconfig.yml
-        export $KUBECONFIG=kubeconfig.yml
+        export $KUBECONFIG="kubeconfig.yml"
     - name: 'Deploy'
       run: helm upgrade hello ./helm --install 
