@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   push:
 
+env:
+  KUBECONFIG="kubeconfig.yml"
 
 jobs:
   deploy:
@@ -16,6 +18,5 @@ jobs:
     - name: Configure kubectl
       run: |
         echo ${{ secrets.KUBECONIFG }} > kubeconfig.yml
-        export $KUBECONFIG="kubeconfig.yml"
     - name: 'Deploy'
       run: helm upgrade hello ./helm --install 
