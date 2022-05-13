@@ -24,7 +24,7 @@ jobs:
         chmod og-rw kubeconfig.yml
     - name: Create secret
       run: |
-        kubectl delete secret regcred
+        kubectl delete secret regcred --ignore-not-found=true
         kubectl create secret docker-registry regcred \
           --docker-server=ghcr.io \
           --docker-username=${{ github.actor }} \
