@@ -15,7 +15,5 @@ jobs:
       run: |
         mkdir .kube
         echo ${{ secrets.KUBECONIFG }} > .kube/config
-    - name: Print
-      run: kubectl get nodes
-    # - name: 'Deploy'
-    #   run: helm upgrade hello ./helm --install
+    - name: 'Deploy'
+      run: helm upgrade hello ./helm --install
