@@ -48,8 +48,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: kubernetes.localdomain
-      paths:
+    - paths:
         - path: /
           pathType: ImplementationSpecific
   tls: []
