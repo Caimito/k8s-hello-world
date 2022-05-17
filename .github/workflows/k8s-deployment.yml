@@ -15,18 +15,21 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Configure kubectl
-      run: |
-        mkdir .kube
-        echo "${{ secrets.KUBECONFIG_FILE_CONTENT }}" >> .kube/config
-        chmod og-rw .kube/config
-        kubectl config view
-    - name: Create secret
-      run: |
-        kubectl delete secret regcred --ignore-not-found=true
-        kubectl create secret docker-registry regcred \
+    - uses: actions-hub/kubectl@master
+      env:
+        KUBE_CONFIG: ${{ secrets.KUBECONFIG_FILE_CONTENT }}
+      with:
+        args: delete secret regcred --ignore-not-found=true
+    - uses: actions-hub/kubectl@master
+      env:
+        KUBE_CONFIG: ${{ secrets.KUBECONFIG_FILE_CONTENT }}
+      with:
+        args: create secret docker-registry regcred \
           --docker-server=ghcr.io \
           --docker-username=${{ github.actor }} \
           --docker-password=${{ secrets.GITHUB_TOKEN }}
     - name: 'Deploy'
-      run: helm upgrade hello ./helm --install --force
+      uses: WyriHaximus/github-action-helm3@v2
+      with:
+        kubeconfig: ${{ secrets.KUBECONFIG_FILE_CONTENT }}
+        exec: helm upgrade hello ./helm --install --force
