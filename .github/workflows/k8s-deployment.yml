@@ -20,7 +20,9 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Configure kubectl
       run: |
+        ls -al
         mkdir .kube
+        ls -al
         echo "${{ secrets.KUBECONFIG }}" >> .kube/config.yml
         chmod og-rw ./kube/config.yml
     - name: Create secret
