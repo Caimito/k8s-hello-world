@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   push:
 
+env:
+  KUBECONFIG: ".kube/config"
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
