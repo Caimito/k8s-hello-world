@@ -4,9 +4,6 @@ on:
   workflow_dispatch:
   push:
 
-env:
-  KUBECONFIG: ${{ secrets.KUBECONFIG }}
-
 jobs:
   deploy:
     runs-on: self-hosted
@@ -21,7 +18,7 @@ jobs:
     - name: Configure kubectl
       run: |
         mkdir .kube
-        echo "${{ secrets.KUBECONFIG }}" >> .kube/config
+        echo "${{ secrets.KUBECONFIG_FILE_CONTENT }}" >> .kube/config
         chmod og-rw .kube/config
         kubectl config view
     - name: Create secret
