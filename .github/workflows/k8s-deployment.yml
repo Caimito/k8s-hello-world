@@ -23,6 +23,7 @@ jobs:
         mkdir .kube
         echo "${{ secrets.KUBECONFIG }}" >> .kube/config
         chmod og-rw .kube/config
+        kubectl config view
     - name: Create secret
       run: |
         kubectl delete secret regcred --ignore-not-found=true
