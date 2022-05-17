@@ -18,6 +18,11 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Configure kubectl
+      run: |
+        mkdir .kube
+        echo "${{ secrets.KUBECONFIG }}" >> .kube/config.yml
+        chmod og-rw ./kube/config.yml
     - name: Create secret
       run: |
         kubectl delete secret regcred --ignore-not-found=true
@@ -26,4 +31,4 @@ jobs:
           --docker-username=${{ github.actor }} \
           --docker-password=${{ secrets.GITHUB_TOKEN }}
     - name: 'Deploy'
-      run: helm upgrade hello ./helm --install --force --kubeconfig kubeconfig.yml
+      run: helm upgrade hello ./helm --install --force
