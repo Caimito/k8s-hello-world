@@ -17,6 +17,7 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Configure kubectl
       run: |
+        mkdir .kube
         echo "${{ secrets.KUBECONFIG_FILE_CONTENT }}" | base64 --decode > ~/.kube/config
         chmod 600 ~/.kube/config
     - run: kubectl delete secret regcred --ignore-not-found=true
