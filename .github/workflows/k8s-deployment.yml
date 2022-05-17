@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   push:
 
+env:
+  KUBECONFIG=${{ secrets.KUBECONFIG }}
+
 jobs:
   deploy:
     runs-on: self-hosted
