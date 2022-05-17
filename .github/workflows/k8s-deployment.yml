@@ -21,8 +21,8 @@ jobs:
     - name: Configure kubectl
       run: |
         mkdir .kube
-        echo "${{ secrets.KUBECONFIG }}" >> .kube/config.yml
-        chmod og-rw .kube/config.yml
+        echo "${{ secrets.KUBECONFIG }}" >> .kube/config
+        chmod og-rw .kube/config
     - name: Create secret
       run: |
         kubectl delete secret regcred --ignore-not-found=true
