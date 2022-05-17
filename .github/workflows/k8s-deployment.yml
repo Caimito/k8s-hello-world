@@ -4,9 +4,6 @@ on:
   workflow_dispatch:
   push:
 
-env:
-  KUBECONFIG: "kubeconfig.yml"
-
 jobs:
   deploy:
     runs-on: self-hosted
@@ -18,10 +15,6 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
-    - name: Configure kubectl
-      run: |
-        echo "${{ secrets.KUBECONFIG }}" >> kubeconfig.yml
-        chmod og-rw kubeconfig.yml
     - name: Create secret
       run: |
         kubectl delete secret regcred --ignore-not-found=true
