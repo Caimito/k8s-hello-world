@@ -22,8 +22,8 @@ jobs:
       run: |
         ls -al
         mkdir .kube
-        ls -al
         echo "${{ secrets.KUBECONFIG }}" >> .kube/config.yml
+        ls -alR
         chmod og-rw ./kube/config.yml
     - name: Create secret
       run: |
